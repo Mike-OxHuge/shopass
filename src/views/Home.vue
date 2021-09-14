@@ -1,5 +1,15 @@
 <template>
   <v-main>
+    <v-btn
+      v-if="
+        $store.state.currentCart.length !== 0 &&
+        $store.state.productsToBuy.length !== 0
+      "
+      block
+      color="red"
+      @click="$store.emit('clearEverything')"
+      >ERASE DATA</v-btn
+    >
     <Picker v-if="$store.state.selection === ''" @selected="setSelection" />
     <v-container v-else>
       <v-btn @click="$store.commit('setSelection', '')">

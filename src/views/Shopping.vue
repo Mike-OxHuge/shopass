@@ -1,10 +1,14 @@
 <template>
   <v-main>
     <v-container d-flex justify-space-around>
-      <h1 v-if="$store.state.productsToBuy.length > 0">Things to buy:</h1>
-      <h1 v-if="totalPrice > 0">Total: {{ totalPrice }} MONEYS</h1>
+      <h2 class="text-left" v-if="$store.state.productsToBuy.length > 0">
+        Things to buy:
+      </h2>
+      <h2 class="text-right" v-if="totalPrice > 0">
+        Total: {{ totalPrice }} MONEYS
+      </h2>
     </v-container>
-    <v-row>
+    <v-row justify="center">
       <v-col
         cols="auto"
         v-for="item in $store.state.productsToBuy"
@@ -20,6 +24,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-btn color="green" outlined block class="mt-15" @click="$router.push('/')"
+      >Back home</v-btn
+    >
   </v-main>
 </template>
 
@@ -39,7 +46,11 @@ export default {
   computed: {
     totalPrice() {
       return this.$store.state.currentCart.reduce((acc, item) => {
-        return acc + parseFloat(item.price.replace(",", "."));
+        let price =
+          item.price === undefined
+            ? 0
+            : parseFloat(item.price.replace(",", "."));
+        return acc + price;
       }, 0);
     },
   },

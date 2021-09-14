@@ -23,8 +23,8 @@
         <v-btn color="green" @click="$emit('listCreated')"> SAVE LIST </v-btn>
         <v-btn color="red" @click="clearList"> CLEAR LIST </v-btn>
       </v-container>
+      <p>Items to buy:</p>
       <v-row>
-        <p>Items to buy:</p>
         <v-col cols="auto" v-for="product in items" :key="product.i">
           <v-container style="border: 1px solid black; border-radius: 1rem">
             <span>{{ product.name }} </span>

@@ -28,6 +28,10 @@ export default new Vuex.Store({
     clearList(state) {
       state.currentList = [];
     },
+    clearEverything(state) {
+      state.currentCart = [];
+      state.productsToBuy = [];
+    },
     deleteItem(state, item) {
       state.currentList = state.currentList.filter((i) => i !== item);
     },
