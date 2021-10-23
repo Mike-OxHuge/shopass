@@ -88,6 +88,14 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-btn
+			v-if="$store.state.productsToBuy.length === 0"
+			block
+			color="red"
+			class="py-10 my-10"
+			@click="$store.commit('clearEverything')"
+			>click me when done</v-btn
+		>
 		<v-btn color="green" outlined block class="mt-15" @click="$router.push('/')"
 			>Back home</v-btn
 		>
@@ -117,7 +125,8 @@ export default {
 					? parseFloat(a) + parseFloat(b)
 					: 0
 			price = price.filter((e) => add(e, 0) !== 0)
-			return price.reduce(add, 0)
+			price = price.reduce(add, 0)
+			return price.toFixed(2)
 		},
 		currentCart() {
 			return this.$store.state.currentCart
