@@ -17,7 +17,8 @@
 
 					<v-card>
 						<v-card-title class="text-h5 grey lighten-2">
-							Total: {{ totalPrice }} 💰
+							Total: {{ totalPrice }} 💰 <br />
+							(might be innacurate)
 						</v-card-title>
 
 						<v-card-text>
@@ -76,12 +77,22 @@
 					<h3>
 						{{
 							`${
-								item.quantity > 0 ? item.quantity + item.unit + ' of ' : 'some '
+								!item.quantity
+									? !item.unit
+										? 'some'
+										: 'few ' + item.unit + ' of '
+									: item.quantity + ' ' + item.unit + ' of '
 							} ${item.name}`
 						}}
 					</h3>
-					<p>Price:</p>
-					<v-text-field v-model="item.price" type="calc"></v-text-field>
+					<!-- <p>Price(optional):</p> -->
+					<v-text-field
+						class="my-3"
+						v-model="item.price"
+						type="calc"
+						outlined
+						label="Price (optional):"
+					></v-text-field>
 					<v-btn color="pink" outlined @click="() => handlePurchase(item)">
 						<v-icon color="pink">shopping_cart</v-icon>
 					</v-btn>
@@ -132,13 +143,17 @@ export default {
 			return this.$store.state.currentCart
 		},
 		filteredArray() {
-			return this.$store.state.productsToBuy.filter((item) => {
-				return item.name.toLowerCase().includes(this.query.toLowerCase())
-			})
+			return this.query
+				? this.$store.state.productsToBuy.filter((item) => {
+						return item.name.toLowerCase().includes(this.query.toLowerCase())
+				  })
+				: this.$store.state.productsToBuy
 		},
 		arrayToMap() {
-			return this.filteredArray.length !== 0
-				? this.filteredArray.filter((item) => item.name.includes(this.query))
+			return this.filteredArray.length !== 0 && this.query
+				? this.filteredArray.filter((item) =>
+						item.name.toLowerCase().includes(this.query.toLowerCase())
+				  )
 				: this.$store.state.productsToBuy
 		},
 	},
