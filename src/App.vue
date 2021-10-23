@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <!-- <v-app-bar app color="primary" dark>
+	<v-app>
+		<!-- <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -33,21 +33,21 @@
       </v-btn>
     </v-app-bar> -->
 
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-app>
+		<v-main>
+			<router-view />
+		</v-main>
+	</v-app>
 </template>
 
 <script>
 export default {
-  name: "App",
+	name: 'App',
 
-  data: () => ({
-    //
-  }),
-};
+	data: () => ({
+		//
+	}),
+}
 </script>
 <style>
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 </style>
